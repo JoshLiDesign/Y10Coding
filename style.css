@@ -1,0 +1,73 @@
+/*style of title text*/
+.fonttop{
+	font-size: 40px; 
+	color: black; 
+	font-family: 'Quicksand', sans-serif; 
+	line-height: 1.6;
+}
+
+/*style of body text*/
+.fontbod{
+	font-size: 20px;
+	color: black;
+	font-family: 'Quicksand', sans-serif; 
+	line-height: 1.6;
+}
+
+/*structure of image display*/
+.column {
+  	float: left;
+  	width: 31%;
+  	padding: 10px;
+}
+
+.row:after {
+  	content: "";
+  	display: table;
+  	clear: both;
+}
+
+/*inner border over images*/
+.imgborder {
+  	outline: 1px solid white;
+ 	outline-offset: -4px;
+}
+
+/*image over overlay*/
+.container {
+	position: relative;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: white;
+}
+
+.container:hover .overlay {
+  opacity: 0.6;
+}
+
+.text {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
