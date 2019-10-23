@@ -83,43 +83,43 @@ def runExe(*args):
 
     ofile.write("<div class='row'>")
 
-    if (response.status_code = 200):
+    #if (myrequest.status_code == 200):
         
-        for j in range(x):
-            for i in range(3):
-                #access elements
-                results = datajson['recipes'][j*3+i]
-                publisher = results['publisher']
-                title = results['title']
-                image = results['image_url']
-                source = results['source_url']
-                publisher = results['publisher']
+    for j in range(x):
+        for i in range(3):
+            #access elements
+            results = datajson['recipes'][j*3+i]
+            publisher = results['publisher']
+            title = results['title']
+            image = results['image_url']
+            source = results['source_url']
+            publisher = results['publisher']
 
-                #structure
-                ofile.write("<div class = 'column'>")
-                ofile.write("<div class = 'fontbod'>")
-                #popularity rank
-                ofile.write("<h1 style='color: red; font-size = 40px'>"+ str(j*3+i+1) + "</h1>")
-                #title of recipe
-                ofile.write("<h2 style='font-size = 15px'>"+ title + "</h2>")
-                #image with hover overlay and link
-                ofile.write("<div class='container'>")
-                ofile.write("<a href="+source+" target='_blank'>")
-                ofile.write("<img src="+image+" class = 'imgborder image' style='width:300px; height:300px;'>")
-                ofile.write("<div class='overlay'>")
-                ofile.write("<div class='text'>"+publisher+"</div>")
-                ofile.write("</div>")
-                ofile.write("</a>")
-                ofile.write("</div>")
-                ofile.write("</div>")
-                ofile.write("</div>")
-        
-        ofile.write("</body>")
-        ofile.write("</html>")
-        ofile.close()
+            #structure
+            ofile.write("<div class = 'column'>")
+            ofile.write("<div class = 'fontbod'>")
+            #popularity rank
+            ofile.write("<h1 style='color: red; font-size = 40px'>"+ str(j*3+i+1) + "</h1>")
+            #title of recipe
+            ofile.write("<h2 style='font-size = 15px'>"+ title + "</h2>")
+            #image with hover overlay and link
+            ofile.write("<div class='container'>")
+            ofile.write("<a href="+source+" target='_blank'>")
+            ofile.write("<img src="+image+" class = 'imgborder image' style='width:300px; height:300px;'>")
+            ofile.write("<div class='overlay'>")
+            ofile.write("<div class='text'>"+publisher+"</div>")
+            ofile.write("</div>")
+            ofile.write("</a>")
+            ofile.write("</div>")
+            ofile.write("</div>")
+            ofile.write("</div>")
+    
+    ofile.write("</body>")
+    ofile.write("</html>")
+    ofile.close()
 
-    else:
-        ofile.write("<h1> An error has occured while processing this data </h1>")
+    #else:
+    #    ofile.write("<h1> An error has occured while processing this data </h1>")
 
 #input & execution catalyst
 lblExec = Label(root, text = "find recipe", font = 40, background = "#363A4C", width = 100, foreground = "white", borderwidth = 2)
