@@ -1,213 +1,262 @@
 <!DOCTYPE html>
-	<head>
-		<!-- Compiled and minified CSS -->
+<html>
+
+<head>
+    <!-- Compiled and minified CSS -->
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-		<!-- Compiled and minified CSS -->
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	    <!-- Compiled and minified JavaScript -->
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-	</head> 
-	<!-- body is what user sees --> 
-	<body>
-			<nav style="background-color: #003444"><a href="#" class="brand-logo center"><i class="large material-icons">search</i>Fenceer</a></nav>
-			  <div class="row">
-			    <div class="col s3 m6 l12">
-			      <div class="card-panel white">
-			        <div class="row">
-				    <form class="col s12">
-				      <div class="row">
-				        <div class="input-field col s10">
-				          <input placeholder="e.g. CandleWood Youth Open" id="title" type="text" class = "validate" required="" aria-required="true">
-				          <label for="title">Title</label>
-				          <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
-				        </div>
-				    </form>
-				  </div>
+</head>
+<!-- body is what user sees -->
 
+<body>
+    <nav style="background-color: #003444"><a href="#" class="brand-logo center"><i class="large material-icons">search</i>Fenceer</a></nav>
+    <div class="row">
+        <div class="card-panel white" style="margin-right: 0">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s10">
+                            <input placeholder="e.g. CandleWood Youth Open" id="title" type="text" class="validate" required="" aria-required="true">
+                            <label for="title">Title</label>
+                            <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
+                        </div>
+                </form>
+                </div>
 
-				  <form action="#">
-				    <p>
-			    		<label style ="margin-left: 20px"> Gender </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Men"/>
-					    <span>Male</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Women"/>
-					    <span>Female</span>
-					  </label>
-					</p>
-				  </form>
+                <form action="#">
+                    <p>
+                        <label style="margin-left: 20px"> Gender </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Men" />
+                            <span>Male</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Women" />
+                            <span>Female</span>
+                        </label>
+                    </p>
+                </form>
 
-				  <form action="#">
-				    <p>
-				    	<label style ="margin-left: 20px"> Weapon </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Foil"/>
-					    <span>Foil</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Epee"/>
-					    <span>Epee</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Sabre"/>
-					    <span>Sabre</span>
-					  </label>
-					</p>
-				  </form>
+                <form action="#">
+                    <p>
+                        <label style="margin-left: 20px"> Weapon </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Foil" />
+                            <span>Foil</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Epee" />
+                            <span>Epee</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Sabre" />
+                            <span>Sabre</span>
+                        </label>
+                    </p>
+                </form>
 
-				  <form action="#">
-				    <p>
-			    		<label style ="margin-left: 20px"> Age Category </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="U13"/>
-					    <span>U13</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="U15"/>
-					    <span>U15</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Cadet"/>
-					    <span>Cadet</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Junior"/>
-					    <span>Junior</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="U23"/>
-					    <span>U23</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Senior"/>
-					    <span>Senior</span>
-					  </label>
-					  <label style = "margin-left: 20px">
-					    <input type="checkbox" id="Veteran"/>
-					    <span>Veteran</span>
-					  </label>
-					</p>
-				  </form>
+                <form action="#">
+                    <p>
+                        <label style="margin-left: 20px"> Age Category </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="U13" />
+                            <span>U13</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="U15" />
+                            <span>U15</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Cadet" />
+                            <span>Cadet</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Junior" />
+                            <span>Junior</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="U23" />
+                            <span>U23</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Senior" />
+                            <span>Senior</span>
+                        </label>
+                        <label style="margin-left: 20px">
+                            <input type="checkbox" id="Veteran" />
+                            <span>Veteran</span>
+                        </label>
+                    </p>
+                </form>
 
-				   <div class="row">
-				    <form class="col s12">
-				      <div class="row">
-				        <div class="input-field col s10" style="margin-left: 10px">
-				        	<i class="material-icons prefix">date_range</i>
-				           <input type="text" id="date" class="datepicker validate" required="" aria-required="true">
-				           <label for="date">Date</label>
-				           <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
-				        </div>
-				    </form>
-				  </div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10" style="margin-left: 10px">
+                                <i class="material-icons prefix">date_range</i>
+                                <input type="text" id="date" class="datepicker validate" required="" aria-required="true">
+                                <label for="date">Date</label>
+                                <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
+                            </div>
+                    </form>
+                    </div>
 
-					<div class="row">
-					    <form class="col s12">
-					      <div class="row">
-					        <div class="input-field col s10" style="margin-left: 20px">
-					        	<i class="material-icons prefix">edit_location</i>
-					          <input placeholder="200 Lonsdale Rd, Toronto, ON" id="location" type="text" class="validate" required="" aria-required="true">
-					          <label for="location">Location</label>
-					          <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
-					        </div>
-					      </div>
-					    </form>
-					  </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s10" style="margin-left: 20px">
+                                    <i class="material-icons prefix">edit_location</i>
+                                    <input placeholder="200 Lonsdale Rd, Toronto, ON" id="location" type="text" class="validate" required="" aria-required="true">
+                                    <label for="location">Location</label>
+                                    <span class="helper-text" data-error="cannot be empty" data-success="">required</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
-					  <div class="row">
-					    <form class="col s12">
-					      <div class="row">
-					        <div class="input-field col s5" style="margin-left: 20px">
-					        	<i class="material-icons prefix">mail</i>
-					          <input placeholder="tstenett@hotmail.com" id="email" type="email" class="validate" required="" aria-required="true">
-					          <label for="email">Email Address</label>
-					          <span class="helper-text" data-error="incorrect format" data-success="">required</span>
-					        </div>
-					        <div class="input-field col s5">
-					        	<i class="material-icons prefix">phone</i>
-					          	<input placeholder="(416) 198-2800" id="phone" type="tel" class="validate">
-					          	<label for="phone">Phone Number</label>
-					        </div>
-					      </div>
-					    </form>
-					  </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s5" style="margin-left: 20px">
+                                    <i class="material-icons prefix">mail</i>
+                                    <input placeholder="tstenett@hotmail.com" id="email" type="email" class="validate" required="" aria-required="true">
+                                    <label for="email">Email Address</label>
+                                    <span class="helper-text" data-error="incorrect format" data-success="">required</span>
+                                </div>
+                                <div class="input-field col s5">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input placeholder="(416) 198-2800" id="phone" type="tel" class="validate">
+                                    <label for="phone">Phone Number</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s10" style="margin-left: 20px">
+                                    <i class="material-icons prefix">insert_comment</i>
+                                    <textarea id="comment" class="materialize-textarea"></textarea>
+                                    <label for="comment">Additional Comments (expandable)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
-					  <div class="row">
-					    <form class="col s12">
-					      <div class="row">
-					        <div class="input-field col s10" style="margin-left: 20px">
-					        	<i class="material-icons prefix">insert_comment</i>
-					          <textarea id="comment" class="materialize-textarea"></textarea>
-					          <label for="comment">Additional Comments (expandable)</label>
-					        </div>
-					      </div>
-					    </form>
-					  </div>
+                    <a id="button" class="waves-effect waves-light btn" style="margin-left: 20px" onclick="pushData()">
+				  	submit
+				  </a>
+                </div>
+            </div>
+        </div>
+</body>
 
+<script>
+    M.AutoInit();
 
-				  <a id = "button" class="waves-effect waves-light btn" style="margin-left: 20px" onclick="pushData(), M.toast({html: 'Submitted'})">submit</a>
-			      </div>
-			    </div>
-			  </div>
-		</div>
-	</body>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyDWOGt8QU-NfIYyDeBdTiCv7PuDeTHSw30",
+        authDomain: "basic-9ddc3.firebaseapp.com",
+        databaseURL: "https://basic-9ddc3.firebaseio.com",
+        projectId: "basic-9ddc3",
+        storageBucket: "basic-9ddc3.appspot.com",
+        messagingSenderId: "528912636568",
+        appId: "1:528912636568:web:9b7eb43652b72d34680eed",
+        measurementId: "G-NYYM19W9WL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-	<script>
-		M.AutoInit();
+    function pushData() {
+        var push = true;
 
-		// Your web app's Firebase configuration
-		  var firebaseConfig = {
-		    apiKey: "AIzaSyDWOGt8QU-NfIYyDeBdTiCv7PuDeTHSw30",
-		    authDomain: "basic-9ddc3.firebaseapp.com",
-		    databaseURL: "https://basic-9ddc3.firebaseio.com",
-		    projectId: "basic-9ddc3",
-		    storageBucket: "basic-9ddc3.appspot.com",
-		    messagingSenderId: "528912636568",
-		    appId: "1:528912636568:web:9b7eb43652b72d34680eed",
-		    measurementId: "G-NYYM19W9WL"
-		  };
-		  // Initialize Firebase
-		  firebase.initializeApp(firebaseConfig);
+        var titleVal = document.getElementById("title").value;
+        if (titleVal == "")
+            push = false;
 
+        var ismen = document.getElementById("Men").checked;
+        var iswomen = document.getElementById("Women").checked;
 
-		  function pushData() {
-            var titleVal = document.getElementById("title").value;
+        if (!ismen && !iswomen)
+            push = false;
 
-            var ismen = document.getElementById("Men").checked;
-            var iswomen = document.getElementById("Women").checked;
+        var isfoil = document.getElementById("Foil").checked;
+        var isepee = document.getElementById("Epee").checked;
+        var issabre = document.getElementById("Sabre").checked;
 
-			var isfoil = document.getElementById("Foil").checked;
-            var isepee = document.getElementById("Epee").checked;
-            var issabre = document.getElementById("Sabre").checked;
+        if (!isfoil && !isepee && !issabre)
+            push = false;
 
-            var isU13 = document.getElementById("U13").checked;
-            var isU15 = document.getElementById("U15").checked;
-            var iscadet = document.getElementById("Cadet").checked;
-            var isjunior = document.getElementById("Junior").checked;
-            var isU23 = document.getElementById("U23").checked;
-            var isSenior = document.getElementById("Senior").checked;
-            var isVeteran = document.getElementById("Veteran").checked;
+        var isU13 = document.getElementById("U13").checked;
+        var isU15 = document.getElementById("U15").checked;
+        var iscadet = document.getElementById("Cadet").checked;
+        var isjunior = document.getElementById("Junior").checked;
+        var isU23 = document.getElementById("U23").checked;
+        var isSenior = document.getElementById("Senior").checked;
+        var isVeteran = document.getElementById("Veteran").checked;
 
-            var dateVal = document.getElementById("date").value;
-            var locationVal = document.getElementById("location").value;
+        if (!isU13 && !isU15 && !iscadet && !isjunior && !isU23 && !isSenior && !isVeteran)
+            push = false;
 
-            var emailVal = document.getElementById("email").value;
-            var phoneVal = document.getElementById("phone").value;
+        var dateVal = document.getElementById("date").value;
 
-            var commentVal = document.getElementById("comment").value;
+        if (dateVal == "")
+            push = false;
 
+        var locationVal = document.getElementById("location").value;
 
-            var js_time = Date.now();
-            var firstid = firebase.database().ref('event/').push({title: titleVal, men: ismen, women: iswomen, time: js_time, 
-            	foil: isfoil, epee: isepee, sabre: issabre, U13: isU13, U15: isU15, cadet: iscadet, junior: isjunior, 
-            	U23: isU23, Senior: isSenior, Veteran: isVeteran, date: dateVal, location: locationVal, email: emailVal,
-            	phone: phoneVal, comment: commentVal});
-			}
-		  // Get a reference to the database service
-		</script>
+        if (locationVal == "")
+            push = false;
+
+        var emailVal = document.getElementById("email").value;
+
+        if (emailVal == "")
+            push = false;
+
+        var phoneVal = document.getElementById("phone").value;
+
+        var commentVal = document.getElementById("comment").value;
+
+        var js_time = Date.now();
+        if (push) {
+            M.toast({
+                html: 'Submitted'
+            })
+            var firstid = firebase.database().ref('event/').push({
+                title: titleVal,
+                men: ismen,
+                women: iswomen,
+                time: js_time,
+                foil: isfoil,
+                epee: isepee,
+                sabre: issabre,
+                U13: isU13,
+                U15: isU15,
+                cadet: iscadet,
+                junior: isjunior,
+                U23: isU23,
+                Senior: isSenior,
+                Veteran: isVeteran,
+                date: dateVal,
+                location: locationVal,
+                email: emailVal,
+                phone: phoneVal,
+                comment: commentVal
+            });
+        } else {
+            M.toast({
+                html: 'Missing Input Field'
+            })
+        }
+    }
+    // Get a reference to the database service
+</script>
+
 </html>
