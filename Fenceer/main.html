@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Fenceer - Main</title>
+    <!--Import jQuery Library-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Josefin+Sans&display=swap" rel="stylesheet">
+
+    <style>
+    	.nothingfound{
+    		text-align: center;
+    		font-size: 24px;
+    	}
+    	.popup {
+              position: relative;
+              cursor: pointer;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+
+            
+            .popup .popuptext {
+              visibility: hidden;
+              width: 160px;
+              background-color: #555;
+              color: #fff;
+              text-align: center;
+              border-radius: 6px;
+              padding: 8px 0;
+              position: absolute;
+              z-index: 1;
+              bottom: 125%;
+              left: 50%;
+              margin-left: -80px;
+            }
+
+            
+            .popup .popuptext::after {
+              content: "";
+              position: absolute;
+/*              top: 100%;*/
+/*              left: 50%;*/
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: #555 transparent transparent transparent;
+            }
+
+            
+            .popup .show {
+              visibility: visible;
+              -webkit-animation: fadeIn 1s;
+              animation: fadeIn 1s;
+            }
+
+            
+            @-webkit-keyframes fadeIn {
+              from {opacity: 0;} 
+              to {opacity: 1;}
+            }
+
+            @keyframes fadeIn {
+              from {opacity: 0;}
+              to {opacity:1 ;}
+            }
+            .button {
+              background-color: #84C2C9;
+              border: none;
+              color: white;
+              padding: 8px 16px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 14px;
+              margin: 4px 2px;
+              cursor: point
+            }
+    </style>
+</head>
+<!-- body is what user sees -->
+
+<body onload="internetconnection()">
+
+    <nav style="background-color: #003444"><a href="#" class="brand-logo center"><i class="large material-icons">search</i><span 
+    	style="font-family: 'Fira Sans', sans-serif">Fenceer</span></a></nav>
+    <ul id="slide-out" class="sidenav" draggable="true">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="bg.jpg">
+                </div>
+                <a href="#user">
+                    <div id="photo"></div>
+                </a>
+                <a href="#name">
+                    <div class="white-text name" id="displayUsername"></div>
+                </a>
+                <a href="#email"><span class="white-text email" id = "email"></span></a>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">select_all</i>Select Specifications:</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <p style="margin-left: 30px">
+            <label style="margin-left: 15px">
+                <input type="checkbox" id="male" />
+                <span>Male</span>
+            </label>
+            <label style="margin-left: 35px">
+                <input type="checkbox" id="female" />
+                <span>Female</span>
+            </label>
+        </p>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <p style="margin-left: 20px">
+            <label>
+                <input type="checkbox" id="foil" />
+                <span>Foil</span>
+            </label>
+            <label style="margin-left: 35px">
+                <input type="checkbox" id="epee" />
+                <span>Epee</span>
+            </label>
+            <label style="margin-left: 20px">
+                <input type="checkbox" id="sabre" />
+                <span>Sabre</span>
+            </label>
+        </p>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <p style="margin-left: 20px">
+            <label>
+                <input type="checkbox" id="U13" />
+                <span>U13</span>
+            </label>
+            <label style="margin-left: 32px">
+                <input type="checkbox" id="U15" />
+                <span>U15</span>
+            </label>
+            <label style="margin-left: 28px">
+                <input type="checkbox" id="cadet" />
+                <span>Cadet</span>
+            </label>
+        </p>
+        <p style="margin-left: 20px">
+            <label>
+                <input type="checkbox" id="junior" />
+                <span>Junior</span>
+            </label>
+            <label style="margin-left: 16px">
+                <input type="checkbox" id="U23" />
+                <span>U23</span>
+            </label>
+            <label style="margin-left: 27px">
+                <input type="checkbox" id="senior" />
+                <span>Senior</span>
+            </label>
+        </p>
+        <p style="margin-left: 118px">
+            <label>
+                <input type="checkbox" id="veteran" />
+                <span>Veteran</span>
+            </label>
+        </p>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="organizer" type="text" class="validate">
+                        <label for="organizer">Organizer</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="location" type="text" class="validate">
+                        <label for="location">Location</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button onclick="internetconnection(), M.toast({html: 'submitted'})" class="waves-effect waves-light btn" style="margin-left: 20px">submit</button>
+        <button type="button" class="waves-effect waves-light btn" style="margin-left: 50px; background-color: red" id="login" onclick="loginfunc()"></button>
+        <!--this is log in-->
+
+    </ul>
+
+    <nav>
+        <div class="nav-wrapper" style="background-color: #84C2C9; margin-left: 10px">
+            <div class="col s12">
+                <a href="#!" class="breadcrumb" style="margin-left: 10px" id="gender">All</a>
+                <a href="#!" class="breadcrumb" id="weapon">All</a>
+                <a href="#!" class="breadcrumb" id="age">All</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="fixed-action-btn">
+        <a id="menu" class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li>
+                <button type="button" class="btn-floating green" id="publish" href="https://www.w3schools.com/html/html_links.asp" onclick="publishpress"> <a href="/user.html" target="blank"><i class="material-icons" id = "publish">publish</i></a></button>
+            </li>
+            <li><a class="btn-floating blue sidenav-trigger" href="#" data-target="slide-out"><i class="material-icons">check_box</i></a></li>
+        </ul>
+    </div>
+
+    <a class="waves-effect waves-light btn" onclick="toggleopen()" style='position: fixed; bottom: 30px; left: 30px; background-color: #84C2C9'>New user?</a>
+
+    <div class="col s12 m6">
+        <div id="featurediscovery" class="card" style='position: fixed; bottom: 15px; left: 145px; right: 40%; height: 30%;overflow-y: scroll; display: none; background-color: #84C2C9'>
+            <div class="card-content">
+                <center>
+                    <p style="color: white">Everything You Need to Know about This Application</p>
+                </center>
+            </div>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#1">Log In</a></li>
+                    <li class="tab"><a href="#2">Search</a></li>
+                    <li class="tab"><a href="#3">Open (Icon)</a></li>
+                    <li class="tab"><a href="#4">Comment</a></li>
+                    <li class="tab"><a href="#5">Upload</a></li>
+                </ul>
+            </div>
+            <div class="card-content grey lighten-4">
+                <div id="1">To log in, hover over the red "pen" icon on the bottom right of the screen and click on the blue "checkbox" icon above it. A separate page should appear on the left of the screen; click on the red "log in" or "log out" button on the bottom right to perform the appropriate action.</div>
+                <div id="2">To search for a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the blue "checkbox" icon above it. A separate page should appear on the left of the screen; check any of the boxes and/or input on the lines under them to narrow your results as seen fit.</div>
+                <div id="3">To oepn a fencing event, click on any of titles listed on the centre of the screen. Details such as gender, weapon, age category, date, etc. should be listed below. NOTE: the <i class='material-icons'>filter_1</i> represents foil, <i class='material-icons'>filter_2</i> represents epee and <i class='material-icons'>filter_3</i> represents sabre.</div>
+                <div id="4">To comment under a fencing event, open any fencing event and scroll to the section before the content-box cuts off. Click on any of the lines to either add a new comment or respond to another user's comment.</div>
+                <div id="5">To upload a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the green "arrow" icon above it. This should lead you to another page where you can input specifications for your event. The upload of these events should be spaced 1 minutes apart (or else would be detected as spam). Note that this function is only available for users that have logged in.</div>
+            </div>
+        </div>
+    </div>
+
+    <ul class='collapsible popout' id="content">
+
+    </ul>
+
+    <script>
+        M.AutoInit();
+
+        var query = firebase.database().ref("event").orderByKey();
+
+        var ismale = document.getElementById("male").checked;
+
+        function loadcontent() {
+            query.once("value")
+                .then(function(snapshot) {
+
+                    var mydiv = document.getElementById("content");
+                    var temp = "";
+
+                    var strgender = "";
+                    if (document.getElementById("male").checked == true)
+                        strgender += "Male, ";
+                    if (document.getElementById("female").checked == true)
+                        strgender += "Female, ";
+                    if (strgender.charAt(strgender.length - 2) == ",")
+                        strgender = strgender.substring(0, strgender.length - 2);
+                    if (strgender == "")
+                        strgender = "All";
+
+                    var strweapon = "";
+                    if (document.getElementById("foil").checked == true)
+                        strweapon += "Foil, ";
+                    if (document.getElementById("epee").checked == true)
+                        strweapon += "Epee, ";
+                    if (document.getElementById("sabre").checked == true)
+                        strweapon += "Sabre, ";
+                    if (strweapon.charAt(strweapon.length - 2) == ",")
+                        strweapon = strweapon.substring(0, strweapon.length - 2);
+                    if (strweapon == "")
+                        strweapon = "All";
+
+                    var strgroup = "";
+                    if (document.getElementById("U13").checked == true)
+                        strgroup += "U13, ";
+                    if (document.getElementById("U15").checked == true)
+                        strgroup += "U15, ";
+                    if (document.getElementById("cadet").checked == true)
+                        strgroup += "Cadet, ";
+                    if (document.getElementById("junior").checked == true)
+                        strgroup += "Junior, ";
+                    if (document.getElementById("U23").checked == true)
+                        strgroup += "U23, ";
+                    if (document.getElementById("senior").checked == true)
+                        strgroup += "Senior, ";
+                    if (document.getElementById("veteran").checked == true)
+                        strgroup += "Veteran, ";
+                    if (strgroup.charAt(strgroup.length - 2) == ",")
+                        strgroup = strgroup.substring(0, strgroup.length - 2);
+                    if (strgroup == "")
+                        strgroup = "All";
+
+                    snapshot.forEach(function(childSnapshot) {
+
+                        var title = childSnapshot.child("title").val();
+
+                        var male = childSnapshot.child("men").val();
+                        if (male == true)
+                            male = "Male";
+                        if (male == false)
+                            male = "";
+
+                        var female = childSnapshot.child("women").val();
+                        if (female == true && male == "Male")
+                            female = "& Female";
+                        else if (female == true)
+                            female = "Female";
+                        else if (female == false)
+                            female = "";
+
+                        var foil = childSnapshot.child("foil").val();
+                        if (foil == true)
+                            foil = "Foil";
+                        if (foil == false)
+                            foil = "";
+
+                        var epee = childSnapshot.child("epee").val();
+                        if (epee == true && foil == "Foil")
+                            epee = "& Epee";
+                        else if (epee == true)
+                            epee = "Epee";
+                        else if (epee == false)
+                            epee = "";
+
+                        var sabre = childSnapshot.child("sabre").val();
+                        if (sabre == true && (foil == "Foil" || epee == "Epee"))
+                            sabre = "& Sabre";
+                        else if (sabre == true)
+                            sabre = "Sabre";
+                        else if (sabre == false)
+                            sabre = "";
+
+                        var strage = "";
+                        var U13 = childSnapshot.child("U13").val();
+                        if (U13 == true)
+                            strage += "U13, ";
+                        var U15 = childSnapshot.child("U15").val();
+                        if (U15 == true)
+                            strage += "U15, ";
+                        var Cadet = childSnapshot.child("cadet").val();
+                        if (Cadet == true)
+                            strage += "Cadet, ";
+                        var Junior = childSnapshot.child("junior").val();
+                        if (Junior == true)
+                            strage += "Junior, ";
+                        var U23 = childSnapshot.child("U23").val();
+                        if (U23 == true)
+                            strage += "U23, ";
+                        var Senior = childSnapshot.child("Senior").val();
+                        if (Senior == true)
+                            strage += "Senior, ";
+                        var Veteran = childSnapshot.child("Veteran").val();
+                        if (Veteran == true)
+                            strage += "Veteran, ";
+                        if (strage.charAt(strage.length - 2) == ",")
+                            strage = strage.substring(0, strage.length - 2);
+
+                        var date = childSnapshot.child("date").val();
+
+                        var location = childSnapshot.child("location").val();
+
+                        var email = childSnapshot.child("email").val();
+
+                        var phone = childSnapshot.child("phone").val();
+
+                        var comment = childSnapshot.child("comment").val();
+
+                        var icons = "";
+                        if (childSnapshot.child("foil").val() == true)
+                            icons += "<i class='material-icons'>filter_1</i>"
+                        if (childSnapshot.child("epee").val() == true)
+                            icons += "<i class='material-icons'>filter_2</i>"
+                        if (childSnapshot.child("sabre").val() == true)
+                            icons += "<i class='material-icons'>filter_3</i>"
+
+                        var ismale = document.getElementById("male").checked;
+                        var isfemale = document.getElementById("female").checked;
+                        var isfoil = document.getElementById("foil").checked;
+                        var isepee = document.getElementById("epee").checked;
+                        var issabre = document.getElementById("sabre").checked;
+                        var isU13 = document.getElementById("U13").checked;
+                        var isU15 = document.getElementById("U15").checked;
+                        var isCadet = document.getElementById("cadet").checked;
+                        var isJunior = document.getElementById("junior").checked;
+                        var isU23 = document.getElementById("U23").checked;
+                        var isSenior = document.getElementById("senior").checked;
+                        var isVeteran = document.getElementById("veteran").checked;
+
+                        var orgVal = document.getElementById("organizer").value;
+                        var locationVal = document.getElementById("location").value;
+
+                        var shouldadd = true;
+
+                        if (ismale == true && childSnapshot.child("men").val() == false)
+                            shouldadd = false;
+                        if (isfemale == true && childSnapshot.child("women").val() == false)
+                            shouldadd = false;
+                        if (isfoil == true && childSnapshot.child("foil").val() == false)
+                            shouldadd = false;
+                        if (isepee == true && childSnapshot.child("epee").val() == false)
+                            shouldadd = false;
+                        if (issabre == true && childSnapshot.child("sabre").val() == false)
+                            shouldadd = false;
+                        if (isU13 == true && childSnapshot.child("U13").val() == false)
+                            shouldadd = false;
+                        if (isU15 == true && childSnapshot.child("U15").val() == false)
+                            shouldadd = false;
+                        if (isCadet == true && childSnapshot.child("cadet").val() == false)
+                            shouldadd = false;
+                        if (isJunior == true && childSnapshot.child("junior").val() == false)
+                            shouldadd = false;
+                        if (isU23 == true && childSnapshot.child("U23").val() == false)
+                            shouldadd = false;
+                        if (isSenior == true && childSnapshot.child("Senior").val() == false)
+                            shouldadd = false;
+                        if (isVeteran == true && childSnapshot.child("Veteran").val() == false)
+                            shouldadd = false;
+
+                        if (JSON.stringify(childSnapshot.child("email")).indexOf(orgVal) == -1 && orgVal != "")
+                            shouldadd = false;
+                        if (JSON.stringify(childSnapshot.child("location")).indexOf(locationVal) == -1 && locationVal != "")
+                            shouldadd = false;
+
+						var titlenospace = title.replace(/\s/g, '');
+
+                        if (shouldadd) {
+                            temp += `<li>
+				      <div id = "`+ email + `cevent` + titlenospace + `" class='collapsible-header' tabindex="0">` + icons + title + `</div>
+				      <div class="collapsible-body" style="line-height: 2.0">
+				      <span style = "color: red">Gender: </span> ` + male + " " + female + `
+				      	<br><span style = "color: red">Weapon: </span>` + foil + " " + epee + " " + sabre + `
+				      		<br><span style = "color: red">Age Category: </span>` + strage + `
+				      		<br><span style = "color: red">Date: </span>` + date + `
+				      		<br><span style = "color: red">Location: </span>` + location + `
+				      		<br><span style = "color: red">Email Address: </span>` + email + `
+				      		<br><span style = "color: red">Phone Number: </span>` + phone + `
+				      		<br><span style = "color: red">Additional Comments: </span>` + comment + `
+				      </span></div>
+				      <div class = "collapsible-body" style = "line-height: 2.0">
+
+                            <div id = "`+ email + `addreply`+ titlenospace + `"></div>
+                            <input id = "` + email + `replypublish` + titlenospace + `" class = "validate">
+                            <label id = "invalidinput">Continue this thread</label>
+                        </div>
+				    </li>`
+                        }
+
+                    });
+
+                    mydiv.innerHTML = temp;
+
+                    if(temp == ""){
+                    	mydiv.innerHTML = `<h1 class = 'nothingfound'>Sorry, Nothing Matches Your Criteria </h1>
+                						  <center><i class="large material-icons">highlight_off</i></center>`
+                    	;
+
+                    }
+
+                    document.getElementById("gender").innerHTML = strgender;
+                    document.getElementById("weapon").innerHTML = strweapon;
+                    document.getElementById("age").innerHTML = strgroup;
+                });
+
+        }
+
+        function toggleopen() {
+            var text = document.getElementById("featurediscovery");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+
+        function internetconnection(){
+        	if(navigator.onLine)
+        		loadcontent();
+        	else
+        		document.getElementById("content").innerHTML = 
+        	`<h1 class = 'nothingfound'> Sorry, No Internet Connection Detected; Please Retry </h1>;
+        	<center><i class="large material-icons">highlight_off</i></center>
+        			`
+        }
+
+        document.getElementById("content")
+            .addEventListener("keyup", function(event) {
+                event.preventDefault();
+            });
+
+        firebase.database().ref('event/').on('value',
+        	function(updatesnap){
+        		loadcontent();
+        	})
+
+        var target;
+        
+            function deletereply() {
+                target = event.target.id;
+                firebase.database().ref('/reply/' + userId).on("value", function(snapshot) {
+                    var numreplies = snapshot.numChildren();
+                    for (i=0; i<numreplies; i++) {
+                        var checking = "deletemenu" + i;
+                        if(checking == target) {
+                            var popupcheck = "popup" + i;
+                            var popup = document.getElementById(popupcheck);
+                            popup.classList.toggle("show");
+                        }
+                    }
+                })
+            //document.getElementById(event.target.id).remove();
+            }
+        
+            function deletebutton() {
+                document.getElementById(window.target).remove();
+
+                firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {  
+                    var topicdelete = firebase.database().ref('/reply/' + userId + "/" + Object.keys(snapshot.val())[window.target.charAt(window.target.length - 1)] + "/").remove();
+                });
+            }
+        
+            var targetobjectkey;
+        
+            function reply() {
+                if (document.getElementById(targetenter).value.length > 0){ /*document.getElementById("invalidinput").style.color = "#9e9e9e";
+                    document.getElementById("invalidinput").innerHTML = "Continue this thread";*/
+                    var username = document.getElementById("displayUsername").textContent;
+                    var inputreply = document.getElementById(targetenter).value;
+                    var js_time = Date.now();
+                    
+                    var targetinputlist = targetenter.replace("replypublish", " ");
+                    
+                    window.targetlist = targetinputlist.split(" ");
+                    
+                    firebase.database().ref('event/').once('value', function(data) {
+                        for (i = 0; i < Object.keys(data.val()).length; i++) {
+                            
+                            var targettitle = data.val()[Object.keys(data.val())[i]]['title'];
+
+                            var targetemail = data.val()[Object.keys(data.val())[i]]['email'];
+                            
+                            if(targetemail == targetlist[0] && targettitle.replace(/\s/g, '') == targetlist[1]) {
+                                window.targetobjectkey = Object.keys(data.val())[i];
+                                M.toast({html: 'Comment Added'})
+                                var replyid = firebase.database().ref('event/' + targetobjectkey + '/reply/' + userId + "/").push({username: username, reply: inputreply, time: js_time}).catch(function(error) {
+                                    alert("Reply could not be sent." + error);
+                                });
+                                break;
+                            }
+                            
+                        }
+                        
+                    }).then(()=>{
+                        //document.getElementById(targetenter).value = "";
+                        receive(targetobjectkey);
+                    })
+                }
+            
+                else {
+                    document.getElementById("invalidinput").innerHTML = "Invalid Input";
+                    document.getElementById("invalidinput").style.color = "red";
+                    console.log("invalidinput");
+                }
+            }
+
+            function receive(targetobjectkey) { 
+                
+                    firebase.database().ref('event/').once('value', function(data) {
+
+                        for (z = 0; z < Object.keys(data.val()).length; z++) {  
+
+                            if (targetobjectkey == Object.keys(data.val())[z]) {
+                                replies = data.val()[Object.keys(data.val())[z]];
+
+                                var all=Object.values(replies['reply']);
+                                for(i=0;i<all.length;i++){
+                                    for(p=0;p<Object.values(Object.values(all)[i]).length;p++){
+                                        messages.push(Object.values(Object.values(all)[i])[p]);
+                                        sortmessages = messages.sort((a,b) => b.time - a.time);
+                                        sortmessages = sortmessages.reverse();
+
+                                    }
+                                }
+                            }                    
+                        }
+
+                        var postid = targetenter.replace("replypublish", "addreply");
+                        
+                        document.getElementById(postid).innerHTML = "";
+                        
+                        for(i = 0; i < sortmessages.length; i++) {
+                            var replyvalue = sortmessages[i]['reply']
+                            var usernamereply = sortmessages[i]['username']
+
+                            document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i +"'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i +"'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+
+                        }
+
+
+                    });
+                
+                }
+        
+            function clickreceive() {
+                window.clicklist = targetclick.replace("cevent", " ").split(" ");
+                
+                firebase.database().ref('event/').once('value', function(data) {
+                        for (i = 0; i < Object.keys(data.val()).length; i++) {
+                            
+                            var targettitle = data.val()[Object.keys(data.val())[i]]['title'];
+
+                            var targetemail = data.val()[Object.keys(data.val())[i]]['email'];
+                            
+                            if(targetemail == clicklist[0] && targettitle.replace(/\s/g, '') == clicklist[1]) {
+                                window.targetobjectkey = Object.keys(data.val())[i];
+                                break;
+                            }
+                            
+                        }
+                        
+                }).then(()=>{
+                    window.messages = [];
+                    window.sortmessages = [];
+
+                    firebase.database().ref('event/').once('value', function(data) {
+
+                        for (z = 0; z < Object.keys(data.val()).length; z++) {  
+
+                            if (targetobjectkey == Object.keys(data.val())[z]) {
+                                replies = data.val()[Object.keys(data.val())[z]];
+
+                                var all=Object.values(replies['reply']);
+                                for(i=0;i<all.length;i++){
+                                    for(p=0;p<Object.values(Object.values(all)[i]).length;p++){
+                                        messages.push(Object.values(Object.values(all)[i])[p]);
+                                        sortmessages = messages.sort((a,b) => b.time - a.time);
+                                        sortmessages = sortmessages.reverse();
+
+                                    }
+                                }
+                            }                    
+                        }
+                        
+                        var postid = targetclick.replace("cevent", "addreply");
+                        
+                        document.getElementById(postid).innerHTML = "";
+
+                        for(i = 0; i < sortmessages.length; i++) {
+                            var replyvalue = sortmessages[i]['reply']
+                            var usernamereply = sortmessages[i]['username']
+                            
+                            document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i +"'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i +"'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+                        }
+
+
+                    });
+
+                })
+                
+            }
+        
+            
+            firebase.database().ref('event/').on('value',
+                function(updatesnap){
+                loadcontent();
+            })
+
+
+            document.getElementById("content")
+                .addEventListener("keyup", function(event) {
+                event.preventDefault();
+            });
+        
+            
+            document.addEventListener("keyup", function(event) {
+                window.targetenter = event.target.id;
+                if(targetenter.includes("replypublish") == true) {
+                    event.preventDefault();
+                    if (event.keyCode === 13) {
+                        reply();
+                    }
+                }
+            });
+        
+            document.addEventListener("click", function(event) {
+                window.targetclick = event.target.id;
+                if(targetclick.includes("cevent") == true) {
+                    event.preventDefault();
+                    clickreceive();
+                }
+            });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+        
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+		<!-- Compiled and minified CSS -->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <!-- Compiled and minified JavaScript -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+        
+	</head> 
+	<!-- body is what user sees --> 
+	<body>
+			<nav style="background-color: #003444"><a href="#" class="brand-logo center"><i class="large material-icons">search</i>Fenceer</a></nav>
+			  <ul id="slide-out" class="sidenav">
+			    <li><div class="user-view">
+			      <div class="background">
+			        <img src="bg.jpg">
+			      </div>
+                    <a href="#user"><div id = "photo"></div></a>
+			      <a href="#name"><div class="white-text name" id = "displayUsername"></div></a>
+			      <a href="#email"><span class="white-text email" id = "email"></span></a>
+			    </div></li>
+			    	 <li><a href="#!"><i class="material-icons">select_all</i>Select Specifications:</a></li>
+			    	  <li><div class="divider"></div></li>
+			    	<p style="margin-left: 30px">
+				    <label>
+				        <input type="checkbox" />
+				        <span>Male</span>
+				      </label>
+				      <label style="margin-left: 70px">
+				        <input type="checkbox" />
+				        <span>Female</span>
+				      </label>
+				  	</p>
+				  	 <li><div class="divider"></div></li>
+				  	 <p style="margin-left: 20px">
+				    <label>
+				        <input type="checkbox" />
+				        <span>Foil</span>
+				      </label>
+				      <label style="margin-left: 20px">
+				        <input type="checkbox" />
+				        <span>Epee</span>
+				      </label>
+				      <label style="margin-left: 20px">
+				        <input type="checkbox" />
+				        <span>Sabre</span>
+				      </label>
+				  	</p>
+				  	<li><div class="divider"></div></li>
+				  	 <p style="margin-left: 20px">
+				    <label>
+				        <input type="checkbox" />
+				        <span>U15</span>
+				      </label>
+				      <label style="margin-left: 16px">
+				        <input type="checkbox" />
+				        <span>Cadet</span>
+				      </label>
+				      <label style="margin-left: 15px">
+				        <input type="checkbox" />
+				        <span>Junior</span>
+				      </label>
+				  	</p>
+				  	<p style="margin-left: 20px">
+				    <label>
+				        <input type="checkbox" />
+				        <span>U23</span>
+				      </label>
+				      <label style="margin-left: 15px">
+				        <input type="checkbox" />
+				        <span>Senior</span>
+				      </label>
+				      <label style="margin-left: 13px">
+				        <input type="checkbox" />
+				        <span>Veteran</span>
+				      </label>
+				  	</p>
+				  	<div class="row">
+					    <form class="col s12">
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input id="email" type="email" class="validate">
+					          <label for="email">Organizer</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input id="email" type="email" class="validate">
+					          <label for="email">Location</label>
+					        </div>
+					      </div>
+					    </form>
+					  </div>
+				 	<a onclick="M.toast({html: 'submitted'})" class="btn" class="waves-effect waves-light btn" style="margin-left: 20px">submit</a>
+				 	<button type = "button" class="waves-effect waves-light btn" style="margin-left: 50px; background-color: red" id="login" onclick="loginfunc()"></button> <!--this is log in-->
+                    
+			  </ul>
+
+			  <nav>
+			    <div class="nav-wrapper" style="background-color: #84C2C9; margin-left: 10px">
+			      <div class="col s12">
+			        <a href="#!" class="breadcrumb" style="margin-left: 10px">Male</a>
+			        <a href="#!" class="breadcrumb">Epee, Sabre</a>
+			        <a href="#!" class="breadcrumb">Cadet, Junior, Senior</a>
+			      </div>
+			    </div>
+			  </nav>
+
+
+			  <ul class="collapsible popout">
+			    <li>
+			      <div class="collapsible-header"><i class="material-icons">filter_3</i>Sabre Intensive at Infinity Fencing Alliance</div>
+			      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			    </li>
+			    <li>
+			      <div class="collapsible-header"><i class="material-icons">filter_1</i><i class="material-icons">filter_2</i>Loudoun Almost Spring Tournament</div>
+			      <div class="collapsible-body" style="line-height: 2.0">
+			      	<span>Who? Male & Female<br>What? Foil & Epee
+			      		<br>When? Feb 29, 2020
+			      		<br>Where? Loudoun International Fencing Club: Ashburn, VA
+			      		<br>Why? Spring season's coming up, so the folks here at Loudoun Fencing Club wanted to start the new season off with a great tournament
+			      		<br>Details.................
+			      	</span>
+			      </div>
+			      <div class="collapsible-body" style="line-height: 2.0">
+			      	<span style="color: red">Josh2019</span>: What equipments are being checked?
+			      	<br>
+			      	<span style="color: red; padding-left: 100px">LoudonOfficial</span>: Hi Josh, only wires and masks are being checked at this tournament
+			         <input id = "replypublish" class="validate">
+			         <label id = "invalidinput">Continue this thread</label>
+			      </div>
+			      <div class="collapsible-body">
+		          <input type = "text" class="validate">
+		          <label>Add Comment</label>
+		        	</div>
+			    </li>
+			    <li>
+			      <div class="collapsible-header"><i class="material-icons">filter_2</i> AIC Saturday Night Foil</div>
+			      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			    </li>
+			  </ul>
+			        
+			<div class="fixed-action-btn">
+			  <a id = "menu" class="btn-floating btn-large red">
+			    <i class="large material-icons"w>mode_edit</i>
+			  </a>
+			  <ul>
+			    <li><button type= "button" class="btn-floating green" id = "publish" href="https://www.w3schools.com/html/html_links.asp" onclick = "publishpress">  <a href="/user.html" target = "blank"><i class="material-icons" id = "publish">publish</i></a></button></li>
+			    <li><a class="btn-floating blue sidenav-trigger" href="#" data-target="slide-out"><i class="material-icons">check_box</i></a></li>
+			  </ul>
+			</div>  
+
+			<ul class='collapsible popout' id="content">
+				
+			</ul>
+        
+        
+	<script>
+
+        	var query = firebase.database().ref("event").orderByKey();
+
+        	var temp = "";
+
+        	var mydiv = document.getElementById("content");
+
+        	query.once("value")
+			  .then(function(snapshot) {
+			    snapshot.forEach(function(childSnapshot) {
+
+			      var title = childSnapshot.child("title").val();
+
+			      var male = childSnapshot.child("men").val();
+			      if(male == true)
+			      	male = "Male";
+			      if(male == false)
+			      	male = "";
+
+			      var female = childSnapshot.child("women").val();
+			      if(female == true && male == "Male")
+			      	female = "& Female";
+			      else if(female == true)
+			      	female = "Female";
+			      else if(female == false)
+			      	female = "";
+
+			      var foil = childSnapshot.child("foil").val();
+			      if(foil == true)
+			      	foil = "Foil";
+			      if(foil == false)
+			      	foil = "";
+
+			      var epee = childSnapshot.child("epee").val();
+			      if(epee == true && foil == "Foil")
+			      	epee = "& Epee";
+			      else if(epee == true)
+			      	epee = "Epee";
+			      else if(epee== false)
+			      	epee = "";
+
+			      var sabre = childSnapshot.child("sabre").val();
+			      if(sabre == true && (foil == "Foil" || epee == "Epee"))
+			      	sabre = "& Sabre";
+			      else if(sabre == true)
+			      	sabre = "Sabre";
+			      else if(sabre == false)
+			      	sabre = "";
+
+			      var strage = "";
+			      var U13 = childSnapshot.child("U13").val();
+			      if(U13 == true)
+			      	strage += "U13, ";
+			      var U15 = childSnapshot.child("U15").val();
+			      if(U15 == true)
+			      	strage += "U15, ";
+			      var Cadet = childSnapshot.child("cadet").val();
+			      if(Cadet == true)
+			      	strage += "Cadet, ";
+			      var Junior = childSnapshot.child("junior").val();
+			      if(Junior == true)
+			      	strage += "Junior, ";
+			      var U23 = childSnapshot.child("U23").val();
+			      if(U23 == true)
+			      	strage += "U23, ";
+			      var Senior = childSnapshot.child("Senior").val();
+			      if(Senior == true)
+			      	strage += "Senior, ";
+			      var Veteran = childSnapshot.child("Veteran").val();
+			      if(Veteran == true)
+			      	strage += "Veteran, ";
+			      if(strage.charAt(strage.length-2) == ",")
+			      	strage = strage.substring(0, strage.length-2);
+
+			      var date = childSnapshot.child("date").val();
+
+			      var location = childSnapshot.child("location").val();
+
+			      var email = childSnapshot.child("email").val();
+
+			      var phone = childSnapshot.child("phone").val();
+
+			      var comment = childSnapshot.child("comment").val();
+
+			      temp += `<li>
+			      <div class='collapsible-header' tabindex="0"><i class='material-icons'>filter_2</i>`+title+`</div>
+			      <div class="collapsible-body" style="line-height: 2.0">
+			      <span style = "color: red">Gender: </span> `+male+" "+female+`
+			      	<br><span style = "color: red">Weapon: </span>`+foil +" "+ epee +" "+sabre+`
+			      		<br><span style = "color: red">Age Category: </span>`+strage+`
+			      		<br><span style = "color: red">Date: </span>`+date+`
+			      		<br><span style = "color: red">Location: </span>`+location+`
+			      		<br><span style = "color: red">Email Address: </span>`+email+`
+			      		<br><span style = "color: red">Phone Number: </span>`+phone+`
+			      		<br><span style = "color: red">Additional Comments: </span>`+comment+`
+			      </span></div>
+			    </li>`
+	
+			  });
+			  	mydiv.innerHTML += temp;
+			});
+
+            function reply() {
+                if (document.getElementById("replypublish").value.length > 0){
+                    
+                    firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {
+                        console.log(snapshot.val());
+                        console.log(Object.values(snapshot));
+                        //var len=Object.values(snapshot);
+                        //console.log(len);
+                    });
+                    
+                    document.getElementById("invalidinput").style.color = "#9e9e9e";
+                    document.getElementById("invalidinput").innerHTML = "Continue this thread";
+                    var inputreply = document.getElementById("replypublish").value;
+                    var js_time = Date.now();
+                    var replyid = firebase.database().ref('reply/' + userId + "/").push({reply: inputreply, time: js_time});
+                    document.getElementById("replypublish").value = "";
+                    
+                }
+                else {
+                    document.getElementById("invalidinput").innerHTML = "Invalid Input";
+                    document.getElementById("invalidinput").style.color = "red";
+                    console.log("invalidinput");
+                }
+            }
+
+            document.getElementById("replypublish")
+                .addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    reply();
+                }
+            });
+
+            M.AutoInit();
+
+		  document.addEventListener('DOMContentLoaded', function() {
+		    var elems = document.querySelectorAll('.fixed-action-btn');
+		    var instances = M.FloatingActionButton.init(elems, {
+		      direction: 'up',
+		      hoverEnabled: false
+		    });
+		  });
+
+	</script>
+
+	</body>
+    
+</html>
