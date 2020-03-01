@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Fenceer - Main</title>
+    <title>Fenceer - Main</title>
     <!--Import jQuery Library-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -21,76 +21,82 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Josefin+Sans&display=swap" rel="stylesheet">
 
     <style>
-    	.nothingfound{
-    		text-align: center;
-    		font-size: 24px;
-    	}
-    	.popup {
-              position: relative;
-              cursor: pointer;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              -ms-user-select: none;
-              user-select: none;
+        .nothingfound {
+            text-align: center;
+            font-size: 24px;
+        }
+        
+        .popup {
+            position: relative;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+        
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            /*              top: 100%;*/
+            /*              left: 50%;*/
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+        
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-
-            
-            .popup .popuptext {
-              visibility: hidden;
-              width: 160px;
-              background-color: #555;
-              color: #fff;
-              text-align: center;
-              border-radius: 6px;
-              padding: 8px 0;
-              position: absolute;
-              z-index: 1;
-              bottom: 125%;
-              left: 50%;
-              margin-left: -80px;
+            to {
+                opacity: 1;
             }
-
-            
-            .popup .popuptext::after {
-              content: "";
-              position: absolute;
-/*              top: 100%;*/
-/*              left: 50%;*/
-              margin-left: -5px;
-              border-width: 5px;
-              border-style: solid;
-              border-color: #555 transparent transparent transparent;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-
-            
-            .popup .show {
-              visibility: visible;
-              -webkit-animation: fadeIn 1s;
-              animation: fadeIn 1s;
+            to {
+                opacity: 1;
             }
-
-            
-            @-webkit-keyframes fadeIn {
-              from {opacity: 0;} 
-              to {opacity: 1;}
-            }
-
-            @keyframes fadeIn {
-              from {opacity: 0;}
-              to {opacity:1 ;}
-            }
-            .button {
-              background-color: #84C2C9;
-              border: none;
-              color: white;
-              padding: 8px 16px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 14px;
-              margin: 4px 2px;
-              cursor: point
-            }
+        }
+        
+        .button {
+            background-color: #84C2C9;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: point
+        }
     </style>
 </head>
 <!-- body is what user sees -->
@@ -447,12 +453,12 @@
                         if (JSON.stringify(childSnapshot.child("content/location")).indexOf(locationVal) == -1 && locationVal != "")
                             shouldadd = false;
 
-						var titlenospace = title.replace(/\s/g, '');
+                        var titlenospace = title.replace(/\s/g, '');
 
                         if (shouldadd) {
                             temp += `<li>
-				      <div id = "`+ email + `cevent` + titlenospace + `" class='collapsible-header' tabindex="0">` + icons + title + 
-                      `<div style="margin-left: auto; margin-right: 10px">`+nameVal+`</div><img src="`+photoVal+`" style=" width: 25px; height: 25px; border-radius: 50%"></div>
+				      <div id = "` + email + `cevent` + titlenospace + `" class='collapsible-header' tabindex="0">` + icons + title +
+                                `<div style="margin-left: auto; margin-right: 10px">` + nameVal + `</div><img src="` + photoVal + `" style=" width: 25px; height: 25px; border-radius: 50%"></div>
 
 				      <div class="collapsible-body" style="line-height: 2.0">
 				      <span style = "color: red">Gender: </span> ` + male + " " + female + `
@@ -466,7 +472,7 @@
 				      </span></div>
 				      <div class = "collapsible-body" style = "line-height: 2.0">
 
-                            <div id = "`+ email + `addreply`+ titlenospace + `"></div>
+                            <div id = "` + email + `addreply` + titlenospace + `"></div>
                             <input id = "` + email + `replypublish` + titlenospace + `" class = "validate">
                             <label id = "invalidinput">Continue this thread</label>
                         </div>
@@ -477,10 +483,9 @@
 
                     mydiv.innerHTML = temp;
 
-                    if(temp == ""){
-                    	mydiv.innerHTML = `<h1 class = 'nothingfound'>Sorry, Nothing Matches Your Criteria </h1>
-                						  <center><i class="large material-icons">highlight_off</i></center>`
-                    	;
+                    if (temp == "") {
+                        mydiv.innerHTML = `<h1 class = 'nothingfound'>Sorry, Nothing Matches Your Criteria </h1>
+                						  <center><i class="large material-icons">highlight_off</i></center>`;
 
                     }
 
@@ -501,225 +506,222 @@
             }
         }
 
-        function internetconnection(){
-        	if(navigator.onLine)
-        		loadcontent();
-        	else
-        		document.getElementById("content").innerHTML = 
-        	`<h1 class = 'nothingfound'> Sorry, No Internet Connection Detected; Please Retry </h1>;
+        function internetconnection() {
+            if (navigator.onLine)
+                loadcontent();
+            else
+                document.getElementById("content").innerHTML =
+                `<h1 class = 'nothingfound'> Sorry, No Internet Connection Detected; Please Retry </h1>;
         	<center><i class="large material-icons">highlight_off</i></center>
         			`
         }
 
         var target;
-        
-            function deletereply() {
-                target = event.target.id;
-                firebase.database().ref('/reply/' + userId).on("value", function(snapshot) {
+
+        function deletereply() {
+            target = event.target.id;
+            firebase.database().ref('/reply/' + userId).on("value", function(snapshot) {
                     var numreplies = snapshot.numChildren();
-                    for (i=0; i<numreplies; i++) {
+                    for (i = 0; i < numreplies; i++) {
                         var checking = "deletemenu" + i;
-                        if(checking == target) {
+                        if (checking == target) {
                             var popupcheck = "popup" + i;
                             var popup = document.getElementById(popupcheck);
                             popup.classList.toggle("show");
                         }
                     }
                 })
-            //document.getElementById(event.target.id).remove();
-            }
-        
-            function deletebutton() {
-                document.getElementById(window.target).remove();
+                //document.getElementById(event.target.id).remove();
+        }
 
-                firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {  
-                    var topicdelete = firebase.database().ref('/reply/' + userId + "/" + Object.keys(snapshot.val())[window.target.charAt(window.target.length - 1)] + "/").remove();
-                });
-            }
-        
-            var targetobjectkey;
-        
-            function reply() {
-                if (document.getElementById(targetenter).value.length > 0){ /*document.getElementById("invalidinput").style.color = "#9e9e9e";
-                    document.getElementById("invalidinput").innerHTML = "Continue this thread";*/
-                    var username = document.getElementById("displayUsername").textContent;
-                    var inputreply = document.getElementById(targetenter).value;
-                    var js_time = Date.now();
-                    
-                    var targetinputlist = targetenter.replace("replypublish", " ");
-                    
-                    window.targetlist = targetinputlist.split(" ");
-                    
-                    firebase.database().ref('event/').once('value', function(data) {
-                        for (i = 0; i < Object.keys(data.val()).length; i++) {
-                            
-                            var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
+        function deletebutton() {
+            document.getElementById(window.target).remove();
 
-                            var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
-                            
-                            if(targetemail == targetlist[0] && targettitle.replace(/\s/g, '') == targetlist[1]) {
-                                window.targetobjectkey = Object.keys(data.val())[i];
-                                var replyid = firebase.database().ref('event/' + targetobjectkey + '/reply/' + userId + "/").push({username: username, reply: inputreply, time: js_time}).catch(function(error) {
-                                    alert("Reply could not be sent." + error);
-                                });
-                                break;
-                            }
-                            
-                        }
-                        
-                    }).then(()=>{
-                        //document.getElementById(targetenter).value = "";
-                        receive(targetobjectkey);
-                    })
-                }
-            
-                else {
-                    document.getElementById("invalidinput").innerHTML = "Invalid Input";
-                    document.getElementById("invalidinput").style.color = "red";
-                    console.log("invalidinput");
-                }
-            }
+            firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {
+                var topicdelete = firebase.database().ref('/reply/' + userId + "/" + Object.keys(snapshot.val())[window.target.charAt(window.target.length - 1)] + "/").remove();
+            });
+        }
 
-            function receive(targetobjectkey) { 
-                
-                    firebase.database().ref('event/').once('value', function(data) {
+        var targetobjectkey;
 
-                        for (z = 0; z < Object.keys(data.val()).length; z++) {  
+        function reply() {
+            if (document.getElementById(targetenter).value.length > 0) {
+                /*document.getElementById("invalidinput").style.color = "#9e9e9e";
+                                   document.getElementById("invalidinput").innerHTML = "Continue this thread";*/
+                var username = document.getElementById("displayUsername").textContent;
+                var inputreply = document.getElementById(targetenter).value;
+                var js_time = Date.now();
 
-                            if (targetobjectkey == Object.keys(data.val())[z]) {
-                                replies = data.val()[Object.keys(data.val())[z]];
+                var targetinputlist = targetenter.replace("replypublish", " ");
 
-                                var all=Object.values(replies['reply']);
-                                for(i=0;i<all.length;i++){
-                                    for(p=0;p<Object.values(Object.values(all)[i]).length;p++){
-                                        messages.push(Object.values(Object.values(all)[i])[p]);
-                                        sortmessages = messages.sort((a,b) => b.time - a.time);
-                                        sortmessages = sortmessages.reverse();
+                window.targetlist = targetinputlist.split(" ");
 
-                                    }
-                                }
-                            }                    
-                        }
-
-                        var postid = targetenter.replace("replypublish", "addreply");
-                        
-                        document.getElementById(postid).innerHTML = "";
-                        
-                        M.toast({
-                            html: 'Reply Published'
-                        })
-                        for(i = 0; i < sortmessages.length; i++) {
-                            var replyvalue = sortmessages[i]['reply']
-                            var usernamereply = sortmessages[i]['username']
-
-                            document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i +"'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i +"'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
-
-                        }
-
-
-                    });
-                
-                }
-        
-            function clickreceive() {
-                window.clicklist = targetclick.replace("cevent", " ").split(" ");
-                
                 firebase.database().ref('event/').once('value', function(data) {
-                        for (i = 0; i < Object.keys(data.val()).length; i++) {
-                            
-                            var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
+                    for (i = 0; i < Object.keys(data.val()).length; i++) {
 
-                            var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
-                            
-                            if(targetemail == clicklist[0] && targettitle.replace(/\s/g, '') == clicklist[1]) {
-                                window.targetobjectkey = Object.keys(data.val())[i];
-                                break;
-                            }
-                            
-                        }
-                        
-                }).then(()=>{
-                    window.messages = [];
-                    window.sortmessages = [];
+                        var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
 
-                    firebase.database().ref('event/').once('value', function(data) {
+                        var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
 
-                        for (z = 0; z < Object.keys(data.val()).length; z++) {  
-
-                            if (targetobjectkey == Object.keys(data.val())[z]) {
-                                replies = data.val()[Object.keys(data.val())[z]];
-
-                                var all=Object.values(replies['reply']);
-                                for(i=0;i<all.length;i++){
-                                    for(p=0;p<Object.values(Object.values(all)[i]).length;p++){
-                                        messages.push(Object.values(Object.values(all)[i])[p]);
-                                        sortmessages = messages.sort((a,b) => b.time - a.time);
-                                        sortmessages = sortmessages.reverse();
-
-                                    }
-                                }
-                            }                    
-                        }
-                        
-                        var postid = targetclick.replace("cevent", "addreply");
-                        
-                        document.getElementById(postid).innerHTML = "";
-
-                        for(i = 0; i < sortmessages.length; i++) {
-                            var replyvalue = sortmessages[i]['reply']
-                            var usernamereply = sortmessages[i]['username']
-                            
-                            document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i +"'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i +"'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
-
+                        if (targetemail == targetlist[0] && targettitle.replace(/\s/g, '') == targetlist[1]) {
+                            window.targetobjectkey = Object.keys(data.val())[i];
+                            var replyid = firebase.database().ref('event/' + targetobjectkey + '/reply/' + userId + "/").push({
+                                username: username,
+                                reply: inputreply,
+                                time: js_time
+                            }).catch(function(error) {
+                                alert("Reply could not be sent." + error);
+                            });
+                            break;
                         }
 
+                    }
 
-                    });
-
+                }).then(() => {
+                    //document.getElementById(targetenter).value = "";
+                    receive(targetobjectkey);
                 })
-                
+            } else {
+                document.getElementById("invalidinput").innerHTML = "Invalid Input";
+                document.getElementById("invalidinput").style.color = "red";
+                console.log("invalidinput");
             }
-        
-            
+        }
 
-            function toggleopen(){
-                var text = document.getElementById("featurediscovery");
-                  if (text.style.display === "none") {
-                    text.style.display = "block";
-                  } else {
-                    text.style.display = "none";
-                  }
+        function receive(targetobjectkey) {
+
+            firebase.database().ref('event/').once('value', function(data) {
+
+                for (z = 0; z < Object.keys(data.val()).length; z++) {
+
+                    if (targetobjectkey == Object.keys(data.val())[z]) {
+                        replies = data.val()[Object.keys(data.val())[z]];
+
+                        var all = Object.values(replies['reply']);
+                        for (i = 0; i < all.length; i++) {
+                            for (p = 0; p < Object.values(Object.values(all)[i]).length; p++) {
+                                messages.push(Object.values(Object.values(all)[i])[p]);
+                                sortmessages = messages.sort((a, b) => b.time - a.time);
+                                sortmessages = sortmessages.reverse();
+
+                            }
+                        }
+                    }
+                }
+
+                var postid = targetenter.replace("replypublish", "addreply");
+
+                document.getElementById(postid).innerHTML = "";
+
+                M.toast({
+                    html: 'Reply Published'
+                })
+                for (i = 0; i < sortmessages.length; i++) {
+                    var replyvalue = sortmessages[i]['reply']
+                    var usernamereply = sortmessages[i]['username']
+
+                    document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i + "'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i + "'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+
+                }
+
+            });
+
+        }
+
+        function clickreceive() {
+            window.clicklist = targetclick.replace("cevent", " ").split(" ");
+
+            firebase.database().ref('event/').once('value', function(data) {
+                for (i = 0; i < Object.keys(data.val()).length; i++) {
+
+                    var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
+
+                    var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
+
+                    if (targetemail == clicklist[0] && targettitle.replace(/\s/g, '') == clicklist[1]) {
+                        window.targetobjectkey = Object.keys(data.val())[i];
+                        break;
+                    }
+
+                }
+
+            }).then(() => {
+                window.messages = [];
+                window.sortmessages = [];
+
+                firebase.database().ref('event/').once('value', function(data) {
+
+                    for (z = 0; z < Object.keys(data.val()).length; z++) {
+
+                        if (targetobjectkey == Object.keys(data.val())[z]) {
+                            replies = data.val()[Object.keys(data.val())[z]];
+
+                            var all = Object.values(replies['reply']);
+                            for (i = 0; i < all.length; i++) {
+                                for (p = 0; p < Object.values(Object.values(all)[i]).length; p++) {
+                                    messages.push(Object.values(Object.values(all)[i])[p]);
+                                    sortmessages = messages.sort((a, b) => b.time - a.time);
+                                    sortmessages = sortmessages.reverse();
+
+                                }
+                            }
+                        }
+                    }
+
+                    var postid = targetclick.replace("cevent", "addreply");
+
+                    document.getElementById(postid).innerHTML = "";
+
+                    for (i = 0; i < sortmessages.length; i++) {
+                        var replyvalue = sortmessages[i]['reply']
+                        var usernamereply = sortmessages[i]['username']
+
+                        document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i + "'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i + "'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+
+                    }
+
+                });
+
+            })
+
+        }
+
+        function toggleopen() {
+            var text = document.getElementById("featurediscovery");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
             }
-        
-            firebase.database().ref('event/').on('value',
-                function(updatesnap){
+        }
+
+        firebase.database().ref('event/').on('value',
+            function(updatesnap) {
                 loadcontent();
             })
 
-
-            document.getElementById("content")
-                .addEventListener("keyup", function(event) {
+        document.getElementById("content")
+            .addEventListener("keyup", function(event) {
                 event.preventDefault();
             });
-        
-            
-            document.addEventListener("keyup", function(event) {
-                window.targetenter = event.target.id;
-                if(targetenter.includes("replypublish") == true) {
-                    event.preventDefault();
-                    if (event.keyCode === 13) {
-                        reply();
-                    }
+
+        document.addEventListener("keyup", function(event) {
+            window.targetenter = event.target.id;
+            if (targetenter.includes("replypublish") == true) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    reply();
                 }
-            });
-        
-            document.addEventListener("click", function(event) {
-                window.targetclick = event.target.id;
-                if(targetclick.includes("cevent") == true) {
-                    event.preventDefault();
-                    clickreceive();
-                }
-            });
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            window.targetclick = event.target.id;
+            if (targetclick.includes("cevent") == true) {
+                event.preventDefault();
+                clickreceive();
+            }
+        });
     </script>
 
 </body>
