@@ -3,7 +3,7 @@
 
 <head>
 
-	<title>Fenceer - Upload</title>
+    <title>Fenceer - Upload</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Compiled and minified CSS -->
@@ -17,9 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-     <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Josefin+Sans&display=swap" rel="stylesheet">
 
     <style>
+
     </style>
 </head>
 <!-- body is what user sees -->
@@ -161,50 +162,48 @@
                         </form>
                     </div>
 
-				    <form action="?" method="POST" style="margin-bottom: 30px; margin-left: 20px">
-				      <div class="g-recaptcha" data-sitekey="6Le9ENkUAAAAAB-S4LKdhBi5cviTV2gv0fsFAaN-"></div>
-				    </form>
+                    <form action="?" method="POST" style="margin-bottom: 30px; margin-left: 20px">
+                        <div class="g-recaptcha" data-sitekey="6Le9ENkUAAAAAB-S4LKdhBi5cviTV2gv0fsFAaN-"></div>
+                    </form>
 
-				      <a id="button" class="waves-effect waves-light btn" style="margin-left: 20px" value="getResponse" onclick="pushData()">submit</a>
-                    
-				  </a>
+                    <a id="button" class="waves-effect waves-light btn" style="margin-left: 20px" value="getResponse" onclick="pushData()">submit</a>
+
+                    </a>
                 </div>
             </div>
         </div>
 
-		<script>
-		    M.AutoInit();
+        <script>
+            M.AutoInit();
 
-		    function checkRecaptcha() {
-			    res = $('#g-recaptcha-response').val();
+            function checkRecaptcha() {
+                res = $('#g-recaptcha-response').val();
 
-			    if (res == "" || res == undefined || res.length == 0)
-			        return false;
-			    else
-			        return true;
-			}
+                if (res == "" || res == undefined || res.length == 0)
+                    return false;
+                else
+                    return true;
+            }
 
+            // Your web app's Firebase configuration
 
-		    // Your web app's Firebase configuration
-
-		    var firebaseConfig = {
-		        apiKey: "AIzaSyDWOGt8QU-NfIYyDeBdTiCv7PuDeTHSw30",
-		        authDomain: "basic-9ddc3.firebaseapp.com",
-		        databaseURL: "https://basic-9ddc3.firebaseio.com",
-		        projectId: "basic-9ddc3",
-		        storageBucket: "basic-9ddc3.appspot.com",
-		        messagingSenderId: "528912636568",
-		        appId: "1:528912636568:web:9b7eb43652b72d34680eed",
-		        measurementId: "G-NYYM19W9WL"
-		    };
-		    // Initialize Firebase
-		    firebase.initializeApp(firebaseConfig);
-
+            var firebaseConfig = {
+                apiKey: "AIzaSyDWOGt8QU-NfIYyDeBdTiCv7PuDeTHSw30",
+                authDomain: "basic-9ddc3.firebaseapp.com",
+                databaseURL: "https://basic-9ddc3.firebaseio.com",
+                projectId: "basic-9ddc3",
+                storageBucket: "basic-9ddc3.appspot.com",
+                messagingSenderId: "528912636568",
+                appId: "1:528912636568:web:9b7eb43652b72d34680eed",
+                measurementId: "G-NYYM19W9WL"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user == null) {
                     userId = "Unknown";
-                    display = "Unknown"; 
+                    display = "Unknown";
                     emailId = "Unknown";
                     photoURL = "Unknown";
                 } else {
@@ -212,83 +211,83 @@
                     display = user.displayName;
                     emailId = user.email;
                     photoURL = user.photoURL;
-                } 
-            }); 
+                }
+            });
 
-		    var locked = false;
-		    function pushData() {
-			        var push = true;
+            var locked = false;
 
-			        var titleVal = document.getElementById("title").value;
-			        if (titleVal == "")
-			            push = false;
+            function pushData() {
+                var push = true;
 
-			        var ismen = document.getElementById("Men").checked;
-			        var iswomen = document.getElementById("Women").checked;
+                var titleVal = document.getElementById("title").value;
+                if (titleVal == "")
+                    push = false;
 
-			        if (!ismen && !iswomen)
-			            push = false;
+                var ismen = document.getElementById("Men").checked;
+                var iswomen = document.getElementById("Women").checked;
 
-			        var isfoil = document.getElementById("Foil").checked;
-			        var isepee = document.getElementById("Epee").checked;
-			        var issabre = document.getElementById("Sabre").checked;
+                if (!ismen && !iswomen)
+                    push = false;
 
-			        if (!isfoil && !isepee && !issabre)
-			            push = false;
+                var isfoil = document.getElementById("Foil").checked;
+                var isepee = document.getElementById("Epee").checked;
+                var issabre = document.getElementById("Sabre").checked;
 
-			        var isU13 = document.getElementById("U13").checked;
-			        var isU15 = document.getElementById("U15").checked;
-			        var iscadet = document.getElementById("Cadet").checked;
-			        var isjunior = document.getElementById("Junior").checked;
-			        var isU23 = document.getElementById("U23").checked;
-			        var isSenior = document.getElementById("Senior").checked;
-			        var isVeteran = document.getElementById("Veteran").checked;
+                if (!isfoil && !isepee && !issabre)
+                    push = false;
 
-			        if (!isU13 && !isU15 && !iscadet && !isjunior && !isU23 && !isSenior && !isVeteran)
-			            push = false;
+                var isU13 = document.getElementById("U13").checked;
+                var isU15 = document.getElementById("U15").checked;
+                var iscadet = document.getElementById("Cadet").checked;
+                var isjunior = document.getElementById("Junior").checked;
+                var isU23 = document.getElementById("U23").checked;
+                var isSenior = document.getElementById("Senior").checked;
+                var isVeteran = document.getElementById("Veteran").checked;
 
-			        var dateVal = document.getElementById("date").value;
+                if (!isU13 && !isU15 && !iscadet && !isjunior && !isU23 && !isSenior && !isVeteran)
+                    push = false;
 
-			        if (dateVal == "")
-			            push = false;
+                var dateVal = document.getElementById("date").value;
 
-			        var locationVal = document.getElementById("location").value;
+                if (dateVal == "")
+                    push = false;
 
-			        if (locationVal == "")
-			            push = false;
+                var locationVal = document.getElementById("location").value;
 
-			        var emailVal = document.getElementById("email").value;
+                if (locationVal == "")
+                    push = false;
 
-			        if (emailVal == "")
-			            push = false;
+                var emailVal = document.getElementById("email").value;
 
-			        var phoneVal = document.getElementById("phone").value;
+                if (emailVal == "")
+                    push = false;
 
-			        var commentVal = document.getElementById("comment").value;
+                var phoneVal = document.getElementById("phone").value;
 
-			        var js_time = Date.now();
+                var commentVal = document.getElementById("comment").value;
 
-			        if(!checkRecaptcha()){
-			        	M.toast({
-			                html: 'Complete ReCAPTCHA'
-			            })
-			        }
-			        else{
-				        if (push) {
-                            if(!locked){
-                                locked = true;
+                var js_time = Date.now();
 
-                                //allow the user to upload events every 3 seconds
-                                setTimeout(unlock, 3000);
-				            M.toast({
-				                html: 'Submitted'
-				            })
-				            var firstid = firebase.database().ref('event').push({
+                if (!checkRecaptcha()) {
+                    M.toast({
+                        html: 'Complete ReCAPTCHA'
+                    })
+                } else {
+                    if (push) {
+                        if (!locked) {
+                            locked = true;
+
+                            //allow the user to upload events every 3 seconds
+                            setTimeout(unlock, 3000);
+                            M.toast({
+                                html: 'Submitted'
+                            })
+                            var firstid = firebase.database().ref('event').push({
                                 content: {
                                     photo: photoURL,
                                     uid: userId,
                                     name: display,
-                                    gmail: emailId, 
+                                    gmail: emailId,
                                     title: titleVal,
                                     men: ismen,
                                     women: iswomen,
@@ -310,29 +309,28 @@
                                     comment: commentVal,
                                     timestamp: js_time
                                 }
-				            }).catch(function(error) {
-                                    alert("Event could not be sent" + error);
+                            }).catch(function(error) {
+                                alert("Event could not be sent" + error);
                             });
-                        }
-                        else{
+                        } else {
                             M.toast({
                                 html: 'Detecting Spam'
                             })
                         }
-				        }
-                        else {
-				            M.toast({
-				                html: 'Missing Input Field'
-				            })
-				        }
-			    	}
-			    }
+                    } else {
+                        M.toast({
+                            html: 'Missing Input Field'
+                        })
+                    }
+                }
+            }
 
-		    function unlock () {
-			    locked = false;
-			}
-		    // Get a reference to the database service
-		</script>
+            function unlock() {
+                locked = false;
+            }
+            // Get a reference to the database service
+        </script>
 
-	</body>
+</body>
+
 </html>
