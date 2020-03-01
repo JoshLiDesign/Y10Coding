@@ -200,6 +200,21 @@
 		    // Initialize Firebase
 		    firebase.initializeApp(firebaseConfig);
 
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user == null) {
+                    userId = "Unknown";
+                    display = "Unknown"; 
+                    emailId = "Unknown";
+                    photoURL = "Unknown";
+                } else {
+                    userId = user.uid;
+                    display = user.displayName;
+                    emailId = user.email;
+                    photoURL = user.photoURL;
+                } 
+            }); 
+
 		    var locked = false;
 		    function pushData() {
 			        var push = true;
@@ -263,32 +278,41 @@
                             if(!locked){
                                 locked = true;
 
-                                //allow the user to upload events every 1 minutes
-                                setTimeout(unlock, 60000);
+                                //allow the user to upload events every 3 seconds
+                                setTimeout(unlock, 3000);
 				            M.toast({
 				                html: 'Submitted'
 				            })
-				            var firstid = firebase.database().ref('event/').push({
-				                title: titleVal,
-				                men: ismen,
-				                women: iswomen,
-				                time: js_time,
-				                foil: isfoil,
-				                epee: isepee,
-				                sabre: issabre,
-				                U13: isU13,
-				                U15: isU15,
-				                cadet: iscadet,
-				                junior: isjunior,
-				                U23: isU23,
-				                Senior: isSenior,
-				                Veteran: isVeteran,
-				                date: dateVal,
-				                location: locationVal,
-				                email: emailVal,
-				                phone: phoneVal,
-				                comment: commentVal
-				            });
+				            var firstid = firebase.database().ref('event').push({
+                                content: {
+                                    photo: photoURL,
+                                    uid: userId,
+                                    name: display,
+                                    gmail: emailId, 
+                                    title: titleVal,
+                                    men: ismen,
+                                    women: iswomen,
+                                    time: js_time,
+                                    foil: isfoil,
+                                    epee: isepee,
+                                    sabre: issabre,
+                                    U13: isU13,
+                                    U15: isU15,
+                                    cadet: iscadet,
+                                    junior: isjunior,
+                                    U23: isU23,
+                                    Senior: isSenior,
+                                    Veteran: isVeteran,
+                                    date: dateVal,
+                                    location: locationVal,
+                                    email: emailVal,
+                                    phone: phoneVal,
+                                    comment: commentVal,
+                                    timestamp: js_time
+                                }
+				            }).catch(function(error) {
+                                    alert("Event could not be sent" + error);
+                            });
                         }
                         else{
                             M.toast({
