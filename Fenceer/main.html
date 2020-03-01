@@ -99,7 +99,7 @@
 
     <nav style="background-color: #003444"><a href="#" class="brand-logo center"><i class="large material-icons">search</i><span 
     	style="font-family: 'Fira Sans', sans-serif">Fenceer</span></a></nav>
-    <ul id="slide-out" class="sidenav" draggable="true">
+    <ul id="slide-out" class="sidenav" draggable="true" style="z-index: 999">
         <li>
             <div class="user-view">
                 <div class="background">
@@ -220,7 +220,7 @@
         </a>
         <ul>
             <li>
-                <button type="button" class="btn-floating green" id="publish" href="https://www.w3schools.com/html/html_links.asp" onclick="publishpress"> <a href="/user.html" target="blank"><i class="material-icons" id = "publish">publish</i></a></button>
+                <button type="button" class="btn-floating green" id="publish" href="https://www.w3schools.com/html/html_links.asp" onclick="publishpress"> <a href="/user.html" target="_blank"><i class="material-icons" id = "publish">publish</i></a></button>
             </li>
             <li><a class="btn-floating blue sidenav-trigger" href="#" data-target="slide-out"><i class="material-icons">check_box</i></a></li>
         </ul>
@@ -229,7 +229,7 @@
     <a class="waves-effect waves-light btn" onclick="toggleopen()" style='position: fixed; bottom: 30px; left: 30px; background-color: #84C2C9'>New user?</a>
 
     <div class="col s12 m6">
-        <div id="featurediscovery" class="card" style='position: fixed; bottom: 15px; left: 145px; right: 40%; height: 30%;overflow-y: scroll; display: none; background-color: #84C2C9'>
+        <div id="featurediscovery" class="card" style='position: fixed; bottom: 15px; left: 145px; right: 40%; height: 30%;overflow-y: scroll; display: none; background-color: #84C2C9; z-index: 600'>
             <div class="card-content">
                 <center>
                     <p style="color: white">Everything You Need to Know about This Application</p>
@@ -249,7 +249,7 @@
                 <div id="2">To search for a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the blue "checkbox" icon above it. A separate page should appear on the left of the screen; check any of the boxes and/or input on the lines under them to narrow your results as seen fit.</div>
                 <div id="3">To oepn a fencing event, click on any of titles listed on the centre of the screen. Details such as gender, weapon, age category, date, etc. should be listed below. NOTE: the <i class='material-icons'>filter_1</i> represents foil, <i class='material-icons'>filter_2</i> represents epee and <i class='material-icons'>filter_3</i> represents sabre.</div>
                 <div id="4">To comment under a fencing event, open any fencing event and scroll to the section before the content-box cuts off. Click on any of the lines to either add a new comment or respond to another user's comment.</div>
-                <div id="5">To upload a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the green "arrow" icon above it. This should lead you to another page where you can input specifications for your event. The upload of these events should be spaced 1 minutes apart (or else would be detected as spam). Note that this function is only available for users that have logged in.</div>
+                <div id="5">To upload a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the green "arrow" icon above it. This should lead you to another page where you can input specifications for your event. The upload of these events should be spaced 3 seconds apart (or else would be detected as spam). Note that this function is only available for users that have logged in.</div>
             </div>
         </div>
     </div>
@@ -268,7 +268,6 @@
         function loadcontent() {
             query.once("value")
                 .then(function(snapshot) {
-
                     var mydiv = document.getElementById("content");
                     var temp = "";
 
@@ -316,15 +315,15 @@
 
                     snapshot.forEach(function(childSnapshot) {
 
-                        var title = childSnapshot.child("title").val();
+                        var title = childSnapshot.child("content/title").val();
 
-                        var male = childSnapshot.child("men").val();
+                        var male = childSnapshot.child("content/men").val();
                         if (male == true)
                             male = "Male";
                         if (male == false)
                             male = "";
 
-                        var female = childSnapshot.child("women").val();
+                        var female = childSnapshot.child("content/women").val();
                         if (female == true && male == "Male")
                             female = "& Female";
                         else if (female == true)
@@ -332,13 +331,13 @@
                         else if (female == false)
                             female = "";
 
-                        var foil = childSnapshot.child("foil").val();
+                        var foil = childSnapshot.child("content/foil").val();
                         if (foil == true)
                             foil = "Foil";
                         if (foil == false)
                             foil = "";
 
-                        var epee = childSnapshot.child("epee").val();
+                        var epee = childSnapshot.child("content/epee").val();
                         if (epee == true && foil == "Foil")
                             epee = "& Epee";
                         else if (epee == true)
@@ -346,7 +345,7 @@
                         else if (epee == false)
                             epee = "";
 
-                        var sabre = childSnapshot.child("sabre").val();
+                        var sabre = childSnapshot.child("content/sabre").val();
                         if (sabre == true && (foil == "Foil" || epee == "Epee"))
                             sabre = "& Sabre";
                         else if (sabre == true)
@@ -355,46 +354,49 @@
                             sabre = "";
 
                         var strage = "";
-                        var U13 = childSnapshot.child("U13").val();
+                        var U13 = childSnapshot.child("content/U13").val();
                         if (U13 == true)
                             strage += "U13, ";
-                        var U15 = childSnapshot.child("U15").val();
+                        var U15 = childSnapshot.child("content/U15").val();
                         if (U15 == true)
                             strage += "U15, ";
-                        var Cadet = childSnapshot.child("cadet").val();
+                        var Cadet = childSnapshot.child("content/cadet").val();
                         if (Cadet == true)
                             strage += "Cadet, ";
-                        var Junior = childSnapshot.child("junior").val();
+                        var Junior = childSnapshot.child("content/junior").val();
                         if (Junior == true)
                             strage += "Junior, ";
-                        var U23 = childSnapshot.child("U23").val();
+                        var U23 = childSnapshot.child("content/U23").val();
                         if (U23 == true)
                             strage += "U23, ";
-                        var Senior = childSnapshot.child("Senior").val();
+                        var Senior = childSnapshot.child("content/Senior").val();
                         if (Senior == true)
                             strage += "Senior, ";
-                        var Veteran = childSnapshot.child("Veteran").val();
+                        var Veteran = childSnapshot.child("content/Veteran").val();
                         if (Veteran == true)
                             strage += "Veteran, ";
                         if (strage.charAt(strage.length - 2) == ",")
                             strage = strage.substring(0, strage.length - 2);
 
-                        var date = childSnapshot.child("date").val();
+                        var date = childSnapshot.child("content/date").val();
 
-                        var location = childSnapshot.child("location").val();
+                        var location = childSnapshot.child("content/location").val();
 
-                        var email = childSnapshot.child("email").val();
+                        var email = childSnapshot.child("content/email").val();
 
-                        var phone = childSnapshot.child("phone").val();
+                        var phone = childSnapshot.child("content/phone").val();
 
-                        var comment = childSnapshot.child("comment").val();
+                        var comment = childSnapshot.child("content/comment").val();
+
+                        var photoVal = childSnapshot.child("content/photo").val();
+                        var nameVal = childSnapshot.child("content/name").val();
 
                         var icons = "";
-                        if (childSnapshot.child("foil").val() == true)
+                        if (childSnapshot.child("content/foil").val() == true)
                             icons += "<i class='material-icons'>filter_1</i>"
-                        if (childSnapshot.child("epee").val() == true)
+                        if (childSnapshot.child("content/epee").val() == true)
                             icons += "<i class='material-icons'>filter_2</i>"
-                        if (childSnapshot.child("sabre").val() == true)
+                        if (childSnapshot.child("content/sabre").val() == true)
                             icons += "<i class='material-icons'>filter_3</i>"
 
                         var ismale = document.getElementById("male").checked;
@@ -415,41 +417,43 @@
 
                         var shouldadd = true;
 
-                        if (ismale == true && childSnapshot.child("men").val() == false)
+                        if (ismale == true && childSnapshot.child("content/men").val() == false)
                             shouldadd = false;
-                        if (isfemale == true && childSnapshot.child("women").val() == false)
+                        if (isfemale == true && childSnapshot.child("content/women").val() == false)
                             shouldadd = false;
-                        if (isfoil == true && childSnapshot.child("foil").val() == false)
+                        if (isfoil == true && childSnapshot.child("content/foil").val() == false)
                             shouldadd = false;
-                        if (isepee == true && childSnapshot.child("epee").val() == false)
+                        if (isepee == true && childSnapshot.child("content/epee").val() == false)
                             shouldadd = false;
-                        if (issabre == true && childSnapshot.child("sabre").val() == false)
+                        if (issabre == true && childSnapshot.child("content/sabre").val() == false)
                             shouldadd = false;
-                        if (isU13 == true && childSnapshot.child("U13").val() == false)
+                        if (isU13 == true && childSnapshot.child("content/U13").val() == false)
                             shouldadd = false;
-                        if (isU15 == true && childSnapshot.child("U15").val() == false)
+                        if (isU15 == true && childSnapshot.child("content/U15").val() == false)
                             shouldadd = false;
-                        if (isCadet == true && childSnapshot.child("cadet").val() == false)
+                        if (isCadet == true && childSnapshot.child("content/cadet").val() == false)
                             shouldadd = false;
-                        if (isJunior == true && childSnapshot.child("junior").val() == false)
+                        if (isJunior == true && childSnapshot.child("content/junior").val() == false)
                             shouldadd = false;
-                        if (isU23 == true && childSnapshot.child("U23").val() == false)
+                        if (isU23 == true && childSnapshot.child("content/U23").val() == false)
                             shouldadd = false;
-                        if (isSenior == true && childSnapshot.child("Senior").val() == false)
+                        if (isSenior == true && childSnapshot.child("content/Senior").val() == false)
                             shouldadd = false;
-                        if (isVeteran == true && childSnapshot.child("Veteran").val() == false)
+                        if (isVeteran == true && childSnapshot.child("content/Veteran").val() == false)
                             shouldadd = false;
 
-                        if (JSON.stringify(childSnapshot.child("email")).indexOf(orgVal) == -1 && orgVal != "")
+                        if (JSON.stringify(childSnapshot.child("content/email")).indexOf(orgVal) == -1 && orgVal != "")
                             shouldadd = false;
-                        if (JSON.stringify(childSnapshot.child("location")).indexOf(locationVal) == -1 && locationVal != "")
+                        if (JSON.stringify(childSnapshot.child("content/location")).indexOf(locationVal) == -1 && locationVal != "")
                             shouldadd = false;
 
 						var titlenospace = title.replace(/\s/g, '');
 
                         if (shouldadd) {
                             temp += `<li>
-				      <div id = "`+ email + `cevent` + titlenospace + `" class='collapsible-header' tabindex="0">` + icons + title + `</div>
+				      <div id = "`+ email + `cevent` + titlenospace + `" class='collapsible-header' tabindex="0">` + icons + title + 
+                      `<div style="margin-left: auto; margin-right: 10px">`+nameVal+`</div><img src="`+photoVal+`" style=" width: 25px; height: 25px; border-radius: 50%"></div>
+
 				      <div class="collapsible-body" style="line-height: 2.0">
 				      <span style = "color: red">Gender: </span> ` + male + " " + female + `
 				      	<br><span style = "color: red">Weapon: </span>` + foil + " " + epee + " " + sabre + `
@@ -491,6 +495,7 @@
             var text = document.getElementById("featurediscovery");
             if (text.style.display === "none") {
                 text.style.display = "block";
+                text.style.position = "fixed";
             } else {
                 text.style.display = "none";
             }
@@ -505,16 +510,6 @@
         	<center><i class="large material-icons">highlight_off</i></center>
         			`
         }
-
-        document.getElementById("content")
-            .addEventListener("keyup", function(event) {
-                event.preventDefault();
-            });
-
-        firebase.database().ref('event/').on('value',
-        	function(updatesnap){
-        		loadcontent();
-        	})
 
         var target;
         
@@ -558,13 +553,12 @@
                     firebase.database().ref('event/').once('value', function(data) {
                         for (i = 0; i < Object.keys(data.val()).length; i++) {
                             
-                            var targettitle = data.val()[Object.keys(data.val())[i]]['title'];
+                            var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
 
-                            var targetemail = data.val()[Object.keys(data.val())[i]]['email'];
+                            var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
                             
                             if(targetemail == targetlist[0] && targettitle.replace(/\s/g, '') == targetlist[1]) {
                                 window.targetobjectkey = Object.keys(data.val())[i];
-                                M.toast({html: 'Comment Added'})
                                 var replyid = firebase.database().ref('event/' + targetobjectkey + '/reply/' + userId + "/").push({username: username, reply: inputreply, time: js_time}).catch(function(error) {
                                     alert("Reply could not be sent." + error);
                                 });
@@ -611,6 +605,9 @@
                         
                         document.getElementById(postid).innerHTML = "";
                         
+                        M.toast({
+                            html: 'Reply Published'
+                        })
                         for(i = 0; i < sortmessages.length; i++) {
                             var replyvalue = sortmessages[i]['reply']
                             var usernamereply = sortmessages[i]['username']
@@ -630,9 +627,9 @@
                 firebase.database().ref('event/').once('value', function(data) {
                         for (i = 0; i < Object.keys(data.val()).length; i++) {
                             
-                            var targettitle = data.val()[Object.keys(data.val())[i]]['title'];
+                            var targettitle = data.val()[Object.keys(data.val())[i]]['content']['title'];
 
-                            var targetemail = data.val()[Object.keys(data.val())[i]]['email'];
+                            var targetemail = data.val()[Object.keys(data.val())[i]]['content']['email'];
                             
                             if(targetemail == clicklist[0] && targettitle.replace(/\s/g, '') == clicklist[1]) {
                                 window.targetobjectkey = Object.keys(data.val())[i];
@@ -673,6 +670,7 @@
                             var usernamereply = sortmessages[i]['username']
                             
                             document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i +"'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i +"'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+
                         }
 
 
@@ -683,6 +681,16 @@
             }
         
             
+
+            function toggleopen(){
+                var text = document.getElementById("featurediscovery");
+                  if (text.style.display === "none") {
+                    text.style.display = "block";
+                  } else {
+                    text.style.display = "none";
+                  }
+            }
+        
             firebase.database().ref('event/').on('value',
                 function(updatesnap){
                 loadcontent();
