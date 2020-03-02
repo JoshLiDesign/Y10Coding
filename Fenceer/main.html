@@ -254,7 +254,7 @@
                 <div id="1">To log in, hover over the red "pen" icon on the bottom right of the screen and click on the blue "checkbox" icon above it. A separate page should appear on the left of the screen; click on the red "log in" or "log out" button on the bottom right to perform the appropriate action.</div>
                 <div id="2">To search for a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the blue "checkbox" icon above it. A separate page should appear on the left of the screen; check any of the boxes and/or input on the lines under them to narrow your results as seen fit.</div>
                 <div id="3">To oepn a fencing event, click on any of titles listed on the centre of the screen. Details such as gender, weapon, age category, date, etc. should be listed below. NOTE: the <i class='material-icons'>filter_1</i> represents foil, <i class='material-icons'>filter_2</i> represents epee and <i class='material-icons'>filter_3</i> represents sabre.</div>
-                <div id="4">To comment under a fencing event, open any fencing event and scroll to the section before the content-box cuts off. Click on any of the lines to either add a new comment or respond to another user's comment. You can also delete comments by right-clicking on your message, then pressing the "Delete Message" button.</div>
+                <div id="4">To comment under a fencing event, open any fencing event and scroll to the section before the content-box cuts off. Click on any of the lines to either add a new comment or respond to another user's comment.</div>
                 <div id="5">To upload a fencing event, hover over the red "pen" icon on the bottom right of the screen and click on the green "arrow" icon above it. This should lead you to another page where you can input specifications for your event. The upload of these events should be spaced 3 seconds apart (or else would be detected as spam). Note that this function is only available for users that have logged in.</div>
             </div>
         </div>
@@ -520,93 +520,26 @@
 
         function deletereply() {
             target = event.target.id;
-            window.username = document.getElementById("displayUsername").textContent;
-            var findusername = document.getElementById(target).textContent;
-            findusernamelist = findusername.replace(":", "")
-            findusernamelist = findusernamelist.split(" ")
-
-            if (findusernamelist[0] == "Guest") {
-                findusername = findusernamelist[0]
-            } else {
-                findusername = findusernamelist[0] + " " + findusernamelist[1]
-            }
-
-            /*console.log(findusernamelist)
-            console.log(findusername)
-            console.log(target)*/
-
-            console.log(sortmessages.length)
-
-            for (i = 0; i < valuemessages.length; i++) {
-                if (username == findusername) {
-                    var checking = "deletemenu" + i;
-                    console.log(target)
-                    console.log(checking)
-                    if (target.includes(checking) == true) {
-                        var popupcheck = "popup" + i;
-                        console.log(popupcheck)
-                        var popup = document.getElementById(popupcheck);
-                        console.log(popup)
-                        popup.classList.toggle("show");
+            firebase.database().ref('/reply/' + userId).on("value", function(snapshot) {
+                    var numreplies = snapshot.numChildren();
+                    for (i = 0; i < numreplies; i++) {
+                        var checking = "deletemenu" + i;
+                        if (checking == target) {
+                            var popupcheck = "popup" + i;
+                            var popup = document.getElementById(popupcheck);
+                            popup.classList.toggle("show");
+                        }
                     }
-                }
-            }
-            //document.getElementById(event.target.id).remove();
+                })
+                //document.getElementById(event.target.id).remove();
         }
 
         function deletebutton() {
+            document.getElementById(window.target).remove();
 
-            firebase.database().ref('event/').once('value', function(data) {
-                for (d = 0; d < Object.keys(data.val()).length; d++) {
-
-                    var contentoftext = document.getElementById(window.target).textContent;
-
-                    contentoftext = sortmessages[window.target.charAt(window.target.length - 1)]['reply']
-
-                    var targettitle = data.val()[Object.keys(data.val())[d]]['content']['title'];
-
-                    var targetemail = data.val()[Object.keys(data.val())[d]]['content']['email'];
-
-                    if (targetemail == emailoftarget && targettitle.replace(/\s/g, '') == titleoftarget) {
-
-                        window.objectkeyoftarget = Object.keys(data.val())[d];
-                        for (z = 0; z < Object.keys(data.val()).length; z++) {
-                            if (objectkeyoftarget == Object.keys(data.val())[z]) {
-                                replies = data.val()[Object.keys(data.val())[z]];
-
-                                var all = Object.values(replies['reply']);
-                                for (i = 0; i < all.length; i++) {
-                                    for (p = 0; p < Object.values(Object.values(all)[i]).length; p++) {
-                                        console.log(Object.values(Object.values(all)[i])[p]['reply'])
-
-                                        if (Object.values(Object.values(all)[i])[p]['reply'] == contentoftext) {
-
-                                            keys2 = Object.keys(all[i])
-                                            keys1 = Object.keys(Object.values(replies['reply']))[i]
-                                            truekeys1 = Object.keys(data.val()[Object.keys(data.val())[d]]['reply'])[keys1]
-
-                                            var topicdelete = firebase.database().ref('event/' + objectkeyoftarget + '/reply/' + truekeys1 + '/' + keys2[p]).remove();
-
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                        /*firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {  
-                            var topicdelete = firebase.database().ref('/event/' + objectkeyoftarget + "/" + Object.keys(snapshot.val())[window.target.charAt(window.target.length - 1)] + "/").remove();
-                        });*/
-                        /*var replyid = firebase.database().ref('event/' + targetobjectkey + '/reply/' + userId + "/").push({username: username, reply: inputreply, time: js_time}).catch(function(error) {
-                            alert("Reply could not be sent." + error);
-                        });*/
-                        break;
-                    }
-
-                }
-
-            }).then(() => {
-
-            })
+            firebase.database().ref('/reply/' + userId).once('value', function(snapshot) {
+                var topicdelete = firebase.database().ref('/reply/' + userId + "/" + Object.keys(snapshot.val())[window.target.charAt(window.target.length - 1)] + "/").remove();
+            });
         }
 
         var targetobjectkey;
@@ -735,24 +668,7 @@
                         }
                     }
 
-                    window.emailoftarget = clicklist[0]
-                    window.titleoftarget = clicklist[1]
-                    window.valuemessages = []
-                    var valuereplies
-
                     var postid = targetclick.replace("cevent", "addreply");
-
-                    for (y = 0; y < Object.keys(data.val()).length; y++) {
-                        valuereplies = data.val()[Object.keys(data.val())[y]];
-                        var valueall = Object.values(valuereplies['reply']);
-                        for (q = 0; q < valueall.length; q++) {
-
-                            for (x = 0; x < Object.values(Object.values(valueall)[q]).length; x++) {
-                                valuemessages.push(Object.values(Object.values(valueall)[q])[x])
-
-                            }
-                        }
-                    }
 
                     document.getElementById(postid).innerHTML = "";
 
@@ -760,14 +676,7 @@
                         var replyvalue = sortmessages[i]['reply']
                         var usernamereply = sortmessages[i]['username']
 
-                        for (k = 0; k < valuemessages.length; k++) {
-                            var openarray = valuemessages[k]['reply']
-                            if (openarray == replyvalue) {
-                                window.itemspace = k
-                            }
-                        }
-
-                        document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + itemspace + "'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + itemspace + "'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
+                        document.getElementById(postid).innerHTML += "<div class = 'popup' style = 'width: 100%;' oncontextmenu = 'deletereply()' id = 'deletemenu" + i + "'><span style='color: red'>" + usernamereply + "</span>: " + replyvalue + "<span class = 'popuptext' id = 'popup" + i + "'><button class = 'button' onclick = 'deletebutton()'>Delete Message</button></span></div>";
 
                     }
 
