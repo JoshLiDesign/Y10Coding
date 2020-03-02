@@ -524,6 +524,9 @@
             var findusername = document.getElementById(target).textContent;
             findusernamelist = findusername.replace(":", "")
             findusernamelist = findusernamelist.split(" ")
+            
+            validateusername = username.split(" ")
+            validatefindusername = validateusername[0] + " " + validateusername[1]
 
             if (findusernamelist[0] == "Guest") {
                 findusername = findusernamelist[0]
@@ -538,7 +541,7 @@
             console.log(sortmessages.length)
 
             for (i = 0; i < valuemessages.length; i++) {
-                if (username == findusername) {
+                if (validatefindusername == findusername) {
                     var checking = "deletemenu" + i;
                     console.log(target)
                     console.log(checking)
